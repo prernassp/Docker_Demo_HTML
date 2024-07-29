@@ -1,14 +1,14 @@
-FROM ubuntu
+# Use the official Nginx base image
+FROM nginx:latest
 
-WORKDIR /app
+# Copy the custom Nginx configuration file to the container
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY nginx.conf /app
-COPY index.html /app
+# Copy the index.html file to the appropriate location in the container
+COPY index.html /usr/share/nginx/html/index.html
 
-RUN apt-get update -y && \
-    apt-get install nginx
-    nginx --version
-    systemctl start nginx
+# Expose port 80 to the outside world
+EXPOSE 80
 
-
-CMD ["index.html"]
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
