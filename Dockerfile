@@ -5,9 +5,10 @@ WORKDIR /app
 COPY nginx.conf /app
 COPY index.html /app
 
-RUN sudo apt-get update -y && \
-    sudo apt-get install nginx
-    sudo nginx --version
-    sudo systemctl start nginx
+RUN apt-get update -y && \
+    apt-get install nginx
+    nginx --version
+    systemctl start nginx
+
 
 CMD ["index.html"]
